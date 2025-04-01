@@ -1,0 +1,215 @@
+# Starter Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-STARTER-MONTHLY-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-5J583779FG087794M",
+  "name": "Starter Monthly",
+  "description": "Monthly Starter Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "MONTH",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "9.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'
+
+# Professional Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-PROFESSIONAL-MONTHLY-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-0NC69288R7795503W",
+  "name": "Professional Monthly",
+  "description": "Monthly Professional Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "MONTH",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "19.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'
+
+# Enterprise Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-ENTERPRISE-MONTHLY-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-6NF20035WW189363S",
+  "name": "Enterprise Monthly",
+  "description": "Monthly Enterprise Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "MONTH",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "99.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'
+
+# Starter Annual Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-STARTER-ANNUAL-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-5J583779FG087794M",
+  "name": "Starter Annual",
+  "description": "Annual Starter Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "YEAR",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "99.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'
+
+# Professional Annual Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-PROFESSIONAL-ANNUAL-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-0NC69288R7795503W",
+  "name": "Professional Annual",
+  "description": "Annual Professional Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "YEAR",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "199.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'
+
+# Enterprise Annual Plan
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/billing/plans \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PLAN-ENTERPRISE-ANNUAL-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "product_id": "PROD-6NF20035WW189363S",
+  "name": "Enterprise Annual",
+  "description": "Annual Enterprise Plan",
+  "billing_cycles": [{
+    "frequency": {
+      "interval_unit": "YEAR",
+      "interval_count": 1
+    },
+    "tenure_type": "REGULAR",
+    "sequence": 1,
+    "total_cycles": 0,
+    "pricing_scheme": {
+      "fixed_price": {
+        "value": "999.99",
+        "currency_code": "USD"
+      }
+    }
+  }],
+  "payment_preferences": {
+    "auto_bill_outstanding": true,
+    "setup_fee": {
+      "value": "0",
+      "currency_code": "USD"
+    },
+    "payment_failure_threshold": 3
+  }
+}'

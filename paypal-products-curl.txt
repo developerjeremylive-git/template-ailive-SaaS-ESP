@@ -1,0 +1,41 @@
+# Starter Product
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/catalogs/products \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PRODUCT-STARTER-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "name": "Starter",
+  "description": "Enhanced features for small teams",
+  "type": "SERVICE",
+  "category": "SOFTWARE"
+}'
+
+# Professional Product
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/catalogs/products \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PRODUCT-PROFESSIONAL-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "name": "Professional",
+  "description": "Advanced features for businesses",
+  "type": "SERVICE",
+  "category": "SOFTWARE"
+}'
+
+# Enterprise Product
+curl -v -X POST https://api-m.sandbox.paypal.com/v1/catalogs/products \
+-H 'Authorization: Bearer A21AAK7KzDlo0xX_lLJKv2j6erYlkmrhEczbPaMpq3YwQXeiom7TTOcqWjSTfMbH_MuOdzoYeSwNY9tkx1fbVk71klsRVf7bQ' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'PayPal-Request-Id: PRODUCT-ENTERPRISE-001' \
+-H 'Prefer: return=representation' \
+-d '{
+  "name": "Enterprise",
+  "description": "Complete access for large organizations",
+  "type": "SERVICE",
+  "category": "SOFTWARE"
+}'

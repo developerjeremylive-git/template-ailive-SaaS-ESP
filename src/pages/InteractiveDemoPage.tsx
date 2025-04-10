@@ -6,7 +6,7 @@ import AnimatedFooter from '../components/AnimatedFooter';
 import { useApp } from '../context/AppContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
-import { FiMessageSquare, FiImage, FiMic, FiCpu, FiCommand, FiPenTool, FiZap, FiSettings, FiX, FiThermometer, FiHash, FiPercent, FiBarChart2 } from 'react-icons/fi';
+import { FiMessageSquare, FiImage, FiMic, FiCpu, FiCommand, FiPenTool, FiZap, FiSettings, FiX, FiThermometer, FiHash, FiPercent, FiBarChart2, FiChevronDown } from 'react-icons/fi';
 import ChatPopup from '../components/ChatPopup';
 
 const GPTDemo = () => {
@@ -348,11 +348,25 @@ const DeepSeekDemo = () => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 	const [streamingContent, setStreamingContent] = useState('');
+	const [model, setModel] = useState('deepseek');
 	const [messages, setMessages] = useState<{
 		role: 'user' | 'assistant';
 		content: string;
 		timestamp: Date;
 	}[]>([]);
+
+	const modelConfigs = {
+		deepseek: {
+			title: 'DeepSeek-R1-Distill-Qwen-32B',
+			description: 'Derivado de DeepSeek-R1, supera a OpenAI-o1-mini.'
+		},
+		llama: {
+			title: 'Llama-4-Scout-17B-16E-Instruct',
+			description: 'Un modelo de lenguaje de última generación.'
+		}
+	};
+
+	const currentModelConfig = modelConfigs[model as keyof typeof modelConfigs];
 	const [settings, setSettings] = useState({
 		temperature: 0.7,
 		maxTokens: 1000,
@@ -390,6 +404,7 @@ const DeepSeekDemo = () => {
 				},
 				body: JSON.stringify({
 					messages: [newMessage],
+					model,
 					temperature: settings.temperature,
 					maxTokens: settings.maxTokens,
 					topP: settings.topP,
@@ -473,8 +488,33 @@ const DeepSeekDemo = () => {
 
 	return (
 
-		<div className="relative space-y-6">
-			<div className="absolute right-0 flex items-center gap-4 p-4 z-10" style={{ top: '-20px' }}>
+		<div className="space-y-4">
+			<div className="flex flex-col gap-4">
+				<div className="text-left">
+					<h2 className="text-2xl font-bold text-white mb-2">{currentModelConfig.title}</h2>
+					<p className="text-violet-200">{currentModelConfig.description}</p>
+				</div>
+			</div>
+			<div className=" right-0 flex items-center gap-4 p-4 z-10">
+				<div className="relative group">
+					<select
+						value={model}
+						onChange={(e) => setModel(e.target.value)}
+						className="appearance-none w-61 px-6 py-2.5 bg-gradient-to-br from-violet-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-violet-500/40 transition-all duration-300 ease-in-out cursor-pointer outline-none border border-violet-400/30 hover:border-violet-400/50 pl-10 pr-10"
+					>
+						<option value="deepseek" className="bg-gray-800 text-white py-2">{'DeepSeek'}</option>
+						<option value="llama" className="bg-gray-800 text-white py-2">{'Llama 4'}</option>
+					</select>
+					<div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/80 pointer-events-none">
+						<FiCpu className="w-5 h-5" />
+					</div>
+					<div className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 pointer-events-none">
+						<FiChevronDown className="w-5 h-5" />
+					</div>
+					<div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900/95 text-white text-sm rounded-lg whitespace-nowrap pointer-events-none border border-violet-500/20">
+						{'Selecciona un modelo de IA'}
+					</div>
+				</div>
 				<button
 					onClick={() => setIsSettingsOpen(!isSettingsOpen)}
 					className="group relative w-14 h-14 flex items-center justify-center bg-gradient-to-br from-violet-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-violet-500/40 hover:scale-110 transition-all duration-300 ease-in-out"
@@ -496,25 +536,25 @@ const DeepSeekDemo = () => {
 					</span>
 				</button>
 			</div>
-			<br />
-			<br />
-			<textarea
-				value={input}
-				onChange={(e) => setInput(e.target.value)}
-				onClick={(e) => e.stopPropagation()}
-				className="w-full h-32 p-4 rounded-xl bg-white bg-opacity-5 text-white placeholder-violet-300"
-				placeholder={t('deepseek_input_placeholder')}
-			/>
-			<button
-				onClick={(e) => {
-					e.stopPropagation();
-					handleSubmit();
-				}}
-				disabled={isLoading || !input.trim()}
-				className="w-full px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-colors disabled:opacity-50"
-			>
-				{isLoading ? t('processing') : t('generate_button')}
-			</button>
+			<div className="space-y-4">
+				<textarea
+					value={input}
+					onChange={(e) => setInput(e.target.value)}
+					onClick={(e) => e.stopPropagation()}
+					className="w-full h-32 p-4 rounded-xl bg-white bg-opacity-5 text-white placeholder-violet-300"
+					placeholder={t('deepseek_input_placeholder')}
+				/>
+				<button
+					onClick={(e) => {
+						e.stopPropagation();
+						handleSubmit();
+					}}
+					disabled={isLoading || !input.trim()}
+					className="w-full px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-colors disabled:opacity-50"
+				>
+					{isLoading ? t('processing') : t('generate_button')}
+				</button>
+			</div>
 			{error && (
 				<div className="p-4 rounded-xl bg-red-500 bg-opacity-10 border border-red-500">
 					<p className="text-red-400">{error}</p>
@@ -611,11 +651,11 @@ const DeepSeekDemo = () => {
 							onClick={() => setIsSettingsOpen(false)}
 						/>
 						<motion.div
-							initial={{ scale: 0.3, opacity: 0, y: -710, x: window.innerWidth < 767 ? -178 : -578 }}
+							initial={{ scale: 0.3, opacity: 0, y: -650, x: window.innerWidth < 767 ? -178 : -448 }}
 							animate={{ scale: 1, opacity: 1 }}
 							exit={{ scale: 0.3, opacity: 0 }}
 							transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-							className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-auto w-[95vw] md:w-[80vw] max-w-6xl ${isDarkTheme ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-b from-violet-700 to-purple-700'} backdrop-blur-md border ${isDarkTheme ? 'border-violet-500/20' : 'border-violet-300/30'} p-4 md:p-6 z-50 rounded-xl overflow-y-auto max-h-[90vh]`}
+							className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-auto w-[95vw] md:w-[47vw] max-w-6xl ${isDarkTheme ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-b from-violet-700 to-purple-700'} backdrop-blur-md border ${isDarkTheme ? 'border-violet-500/20' : 'border-violet-300/30'} p-4 md:p-6 z-50 rounded-xl overflow-y-auto max-h-[90vh]`}
 						>
 							<div className="flex justify-between items-center mb-4 md:mb-6">
 								<h3 className="text-lg font-semibold text-white">{t('model_settings')}</h3>
@@ -626,12 +666,7 @@ const DeepSeekDemo = () => {
 									<FiX className="w-6 h-6" />
 								</button>
 							</div>
-							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-								<div className="flex flex-col items-center justify-center text-center p-4">
-									<FiSettings className="w-12 h-12 md:w-16 md:h-16 text-violet-300 mb-4" />
-									<h3 className="text-lg md:text-xl font-semibold text-white mb-2">{t('advanced_settings')}</h3>
-									<p className="text-violet-200">{t('coming_soon')}</p>
-								</div>
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
 								<div className="flex flex-col items-center justify-center text-center p-4">
 									<FiSettings className="w-12 h-12 md:w-16 md:h-16 text-violet-300 mb-4" />
 									<h3 className="text-lg md:text-xl font-semibold text-white mb-2">{t('advanced_settings')}</h3>
@@ -677,7 +712,7 @@ const DeepSeekDemo = () => {
 										<input
 											type="range"
 											min="100"
-											max="4000"
+											max="8200"
 											step="100"
 											value={settings.maxTokens}
 											onChange={(e) => handleSettingsChange('maxTokens', parseInt(e.target.value))}
@@ -756,17 +791,18 @@ export default function InteractiveDemoPage() {
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 	const [selectedDemo, setSelectedDemo] = useState(String(searchParams.get('model') || 'deepseek'));
+	const [showAllDemos, setShowAllDemos] = useState(false);
 
 	// Enhanced demos array with model information
 	const demos: DemoInterface[] = [
 		{
 			id: 'deepseek',
-			title: 'DeepSeek',
-			description: t('deepseek_description'),
+			title: t('tab_worker_ai'),
+			description: t('demo_worker_ai_desc'),
 			icon: <FiZap className="w-6 h-6" />,
 			component: DeepSeekDemo,
 			modelId: 'deepseek',
-			modelName: 'DeepSeek-R1-Distill-Qwen-32B',
+			modelName: t('tab_worker_ai'),
 			metrics: {
 				latency: '~1.5s',
 				availability: '99.9%',
@@ -906,10 +942,11 @@ export default function InteractiveDemoPage() {
 
 					{/* Demo Selector */}
 					<div className="max-w-4xl mx-auto">
-						<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-							{demos.map((demo) => (
+						<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 relative">
+							{demos.slice(0, showAllDemos ? demos.length : 3).map((demo) => (
 								<motion.button
 									key={demo.id}
+									layout
 									onClick={() => {
 										setSelectedDemo(demo.id);
 										navigate(`/interactive-demo?model=${demo.modelId}`, { replace: true });
@@ -927,6 +964,20 @@ export default function InteractiveDemoPage() {
 									</div>
 								</motion.button>
 							))}
+							{!showAllDemos && demos.length > 3 && (
+								<motion.button
+									layout
+									onClick={() => setShowAllDemos(true)}
+									whileHover={{ scale: 1.02 }}
+									whileTap={{ scale: 0.98 }}
+									className="p-4 rounded-xl bg-gradient-to-br from-violet-600 to-purple-600 text-white hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+								>
+									<div className="flex flex-col items-center text-center">
+										<FiChevronDown className="w-6 h-6 animate-bounce" />
+										<span className="mt-2 font-medium">{t('show_more')}</span>
+									</div>
+								</motion.button>
+							)}
 						</div>
 
 						{/* Demo Content */}

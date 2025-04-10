@@ -148,7 +148,7 @@ function AppContent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {/* Language Models */}
                   <Link
-                    to="/models?category=language"
+                    to={`/models?category=${t('url_category_language')}`}
                     className="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 cursor-pointer transform transition-all hover:scale-105"
                   >
                     <div className="text-4xl mb-6">🤖</div>
@@ -165,7 +165,7 @@ function AppContent() {
 
                   {/* Image Generation */}
                   <Link
-                    to="/models?category=image"
+                    to={`/models?category=${t('url_category_image')}`}
                     className="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 cursor-pointer transform transition-all hover:scale-105"
                   >
                     <div className="text-4xl mb-6">🎨</div>
@@ -182,7 +182,7 @@ function AppContent() {
 
                   {/* Speech Recognition */}
                   <Link
-                    to="/models?category=speech"
+                    to={`/models?category=${t('url_category_speech')}`}
                     className="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 cursor-pointer transform transition-all hover:scale-105"
                   >
                     <div className="text-4xl mb-6">🎤</div>

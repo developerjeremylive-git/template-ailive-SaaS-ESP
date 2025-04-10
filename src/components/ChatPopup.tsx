@@ -115,7 +115,7 @@ export default function ChatPopup({
                                 <h2 className="text-xl font-semibold text-white">{t('chat_with_ai')}</h2>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <motion.button
+                                {/* <motion.button
                                     onClick={() => setShowHistory(!showHistory)}
                                     className="flex items-center space-x-2 px-4 py-2 bg-violet-600/20 hover:bg-violet-600/30 text-violet-200 rounded-lg transition-colors"
                                     whileHover={{ scale: 1.05 }}
@@ -123,9 +123,9 @@ export default function ChatPopup({
                                 >
                                     <FiDatabase className="w-4 h-4" />
                                     <span className="text-sm font-medium">
-                                        {showHistory ? t('hide_history') : t('show_history')}
+                                        {showHistory ? t('hide_history') : t('show_hadvanced_settingsistory')}
                                     </span>
-                                </motion.button>
+                                </motion.button> */}
                                 <button
                                     onClick={onClose}
                                     className="p-2 text-violet-300 hover:text-white transition-colors"

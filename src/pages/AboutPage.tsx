@@ -1,33 +1,30 @@
 import { motion } from 'framer-motion'
 import Header from '../components/Header'
 import AnimatedFooter from '../components/AnimatedFooter'
-import { FiUsers, FiTarget, FiHeart, FiGlobe } from 'react-icons/fi'
+import { FiUsers, FiTarget, FiHeart, FiGlobe, FiBriefcase, FiCpu, FiDatabase, FiTrendingUp, FiStar, FiUser } from 'react-icons/fi'
 import { useLanguage } from '../context/LanguageContext'
+import React from 'react'
 
 const teamMembers = [
 	{
-		name: 'Dr. Alexandra Chen',
+		icon: <FiBriefcase className="w-16 h-16 text-purple-400" />,
 		role: 'CEO & Co-founder',
-		image: '/team/alexandra.jpg',
-		bio: 'Former AI Research Lead at Stanford University with 15+ years of experience in machine learning.',
+		bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 	},
 	{
-		name: 'Marcus Thompson',
+		icon: <FiCpu className="w-16 h-16 text-blue-400" />,
 		role: 'CTO & Co-founder',
-		image: '/team/marcus.jpg',
-		bio: 'Previously led engineering teams at Google AI and contributed to breakthrough language models.',
+		bio: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 	},
 	{
-		name: 'Dr. Sarah Patel',
+		icon: <FiDatabase className="w-16 h-16 text-green-400" />,
 		role: 'Head of Research',
-		image: '/team/sarah.jpg',
-		bio: 'Published researcher in neural networks with focus on model optimization and efficiency.',
+		bio: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
 	},
 	{
-		name: 'James Wilson',
+		icon: <FiTrendingUp className="w-16 h-16 text-indigo-400" />,
 		role: 'Head of Product',
-		image: '/team/james.jpg',
-		bio: 'Product veteran with experience scaling AI products from concept to millions of users.',
+		bio: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 	},
 ]
 
@@ -52,27 +49,27 @@ const values = [
 const timeline = [
 	{
 		year: '2020',
-		title: 'Company Founded',
+		title: 'Lorem ipsum dolor sit amet',
 		description:
-			'AILive was founded with a vision to democratize access to advanced AI models.',
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 	},
 	{
 		year: '2021',
-		title: 'First API Launch',
+		title: 'Ut enim ad minim veniam',
 		description:
-			'Released our first set of AI models via API, serving thousands of developers.',
+			'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 	},
 	{
 		year: '2022',
-		title: 'Series A Funding',
+		title: 'Duis aute irure dolor',
 		description:
-			'Raised $50M to accelerate development and expand our model offerings.',
+			'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
 	},
 	{
 		year: '2023',
-		title: 'Global Expansion',
+		title: 'Excepteur sint occaecat',
 		description:
-			'Opened offices in Europe and Asia, serving clients worldwide.',
+			'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 	},
 ]
 
@@ -158,7 +155,7 @@ export default function AboutPage() {
 						className="mb-24"
 					>
 						<h2 className="text-3xl font-bold text-white text-center mb-12">
-							Our Team
+							{t('about_team')}
 						</h2>
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 							{teamMembers.map((member, index) => (
@@ -169,14 +166,16 @@ export default function AboutPage() {
 									transition={{ delay: 0.4 + index * 0.1 }}
 									className="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6"
 								>
-									<img
-										src={member.image}
-										alt={member.name}
-										className="w-full h-48 object-cover rounded-xl mb-6"
-									/>
-									<h3 className="text-xl font-semibold text-white mb-2">
-										{member.name}
-									</h3>
+									<div className="flex justify-center mb-6">
+										<div className="relative">
+											<div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+												<FiUser className="w-8 h-8 text-gray-500" />
+											</div>
+											<div className={`absolute -bottom-2 -right-2 ${member.icon.props.className.includes('purple') ? 'bg-purple-500' : member.icon.props.className.includes('blue') ? 'bg-blue-500' : member.icon.props.className.includes('green') ? 'bg-green-500' : 'bg-indigo-500'} rounded-full p-2`}>
+												<FiStar className="w-4 h-4 text-white" />
+											</div>
+										</div>
+									</div>
 									<p className="text-purple-400 mb-4">{member.role}</p>
 									<p className="text-violet-200">{member.bio}</p>
 								</motion.div>
@@ -191,7 +190,7 @@ export default function AboutPage() {
 						transition={{ delay: 0.6 }}
 					>
 						<h2 className="text-3xl font-bold text-white text-center mb-12">
-							Our Journey
+							{t('about_journey')}
 						</h2>
 						<div className="max-w-4xl mx-auto">
 							{timeline.map((event, index) => (
@@ -221,4 +220,4 @@ export default function AboutPage() {
 			<AnimatedFooter />
 		</div>
 	)
-} 
+}

@@ -194,7 +194,7 @@ export default function PricingPage() {
       billing_cycle: 'monthly',
       features: [
         currentLanguage === 'es' ? 'Chat de IA Básico' : 'Basic AI Chat',
-        currentLanguage === 'es' ? '5 llamadas API por día' : '5 API calls per day',
+        // currentLanguage === 'es' ? '5 llamadas API por día' : '5 API calls per day',
         currentLanguage === 'es' ? 'Soporte comunitario' : 'Community Support',
         currentLanguage === 'es' ? 'Tiempo de respuesta estándar' : 'Standard Response Time'
       ],
@@ -211,8 +211,8 @@ export default function PricingPage() {
         currentLanguage === 'es' ? 'Chat de IA Avanzado' : 'Advanced AI Chat',
         currentLanguage === 'es' ? 'Acceso API Hugging Face - Últimos Modelos y Espacios de IA' : 'Hugging Face API Access - Latest AI Models & Spaces',
         currentLanguage === 'es' ? 'Agente de Navegador - Interacción Web Inteligente y Extracción de Datos' : 'Browser Agent - Smart Web Interaction & Data Extraction',
-        currentLanguage === 'es' ? '25 llamadas API por día' : '25 API calls per day',
-        currentLanguage === 'es' ? 'Soporte prioritario con tiempo de respuesta rápido' : 'Priority Support with Fast Response Time'
+        // currentLanguage === 'es' ? '25 llamadas API por día' : '25 API calls per day',
+        // currentLanguage === 'es' ? 'Soporte prioritario con tiempo de respuesta rápido' : 'Priority Support with Fast Response Time'
       ],
       popular: true,
     },
@@ -227,9 +227,9 @@ export default function PricingPage() {
         currentLanguage === 'es' ? 'Todas las funciones Iniciales' : 'All Starter Features',
         currentLanguage === 'es' ? 'Agente de Scraping - Llenado de Formularios y Recopilación de Datos' : 'Scraping Agent - Form Filling & Data Collection',
         currentLanguage === 'es' ? 'Investigación Profunda - Análisis Avanzado y Perspectivas' : 'Deep Research - Advanced Analysis & Insights',
-        currentLanguage === 'es' ? 'Asistente de IA con Capacidades Mejoradas' : 'AI Assistant with Enhanced Capabilities',
-        currentLanguage === 'es' ? '100 llamadas API por día' : '100 API calls per day',
-        currentLanguage === 'es' ? 'Soporte premium con acceso 24/7' : 'Premium Support with 24/7 Access'
+        // currentLanguage === 'es' ? 'Asistente de IA con Capacidades Mejoradas' : 'AI Assistant with Enhanced Capabilities',
+        // currentLanguage === 'es' ? '100 llamadas API por día' : '100 API calls per day',
+        // currentLanguage === 'es' ? 'Soporte premium con acceso 24/7' : 'Premium Support with 24/7 Access'
       ],
       popular: false,
     },
@@ -243,8 +243,8 @@ export default function PricingPage() {
       features: [
         currentLanguage === 'es' ? 'Todas las funciones Profesionales' : 'All Pro Features',
         currentLanguage === 'es' ? 'Desarrollo y Despliegue de Modelos IA Personalizados' : 'Custom AI Models Development & Deployment',
-        currentLanguage === 'es' ? 'Ajuste y Optimización de Modelos' : 'Model Fine-tuning & Optimization',
-        currentLanguage === 'es' ? 'Equipo de soporte dedicado 24/7' : '24/7 Dedicated Support Team',
+        // currentLanguage === 'es' ? 'Ajuste y Optimización de Modelos' : 'Model Fine-tuning & Optimization',
+        // currentLanguage === 'es' ? 'Equipo de soporte dedicado 24/7' : '24/7 Dedicated Support Team',
         currentLanguage === 'es' ? 'Integraciones y Soluciones Personalizadas' : 'Custom Integrations & Solutions'
       ],
       popular: false,
@@ -668,37 +668,10 @@ export default function PricingPage() {
                       ))}
                     </ul>
 
-                    <div className="space-y-6 p-4">
-                      {/* <motion.button
-                        whileHover={{ scale: 1.02, boxShadow: '0 8px 16px rgba(123, 43, 249, 0.2)' }}
-                        whileTap={{ scale: 0.98 }}
-                        style={{
-                          borderRadius: 4,
-                          height: '52px'
-                        }}
-                        initial={false}
-                        onClick={() => handleChangePlan(currentPlanId)}
-                        disabled={isUpdating || isCurrentPlan}
-                        className={`pricing-button relative w-full bg-gradient-to-r from-purple-600 to-violet-600 
-                        hover:from-purple-700 hover:to-violet-700 active:from-purple-700 active:to-violet-700
-                        text-white rounded-xl py-4 px-8 font-semibold 
-                        transition-all duration-300 ease-out
-                        ${(isUpdating || isCurrentPlan) ?
-                            'opacity-60 cursor-not-allowed bg-gray-400' :
-                            'hover:shadow-lg hover:shadow-purple-500/30'}
-                        transform hover:-translate-y-1
-                        overflow-hidden group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
-                      >
-                        <span className="relative z-10 flex items-center justify-center space-x-3 font-paypal" style={{ marginTop: '-4px', marginLeft: '-3px' }}>
-                          <span className="text-xl font-light" style={{ fontFamily: 'sans-serif' }}>{currentLanguage === 'es' ? 'Pagar con ' : 'Pay with '}<span className="font-bold text-2xl transform -skew-x-12 inline-block" style={{ marginTop: '-6px', fontFamily: 'PayPalOpen-Regular, Helvetica, Arial, "Liberation Sans", sans-serif' }}>Stripe</span></span>
-                          {isUpdating && (
-                            <div className="ml-2 animate-spin rounded-full h-5 w-5 border-t-2 border-white"></div>
-                          )}
-                        </span>
-                      </motion.button> */}
+                    <div className="space-y-6 p-2">
 
                       {/* <div className="mt-4"> */}
-                      {/* <motion.div
+                      <motion.div
                         className="relative h-[52px] text-black font-medium"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -730,8 +703,40 @@ export default function PricingPage() {
                             }}
                           />
                         </div>
-                      </motion.div> */}
+                      </motion.div>
                       {/* </div> */}
+
+                      <motion.button
+                        whileHover={{ scale: 1.02, boxShadow: '0 8px 16px rgba(123, 43, 249, 0.2)' }}
+                        whileTap={{ scale: 0.98 }}
+                        style={{
+                          borderRadius: 4,
+                          height: '52px'
+                        }}
+                        initial={false}
+                        onClick={() => user ? handleChangePlan(currentPlanId) : setIsLoginOpen(true)}
+                        disabled={isUpdating || isCurrentPlan}
+                        className={`pricing-button relative w-full bg-gradient-to-r from-purple-600 to-violet-600 
+                        hover:from-purple-700 hover:to-violet-700 active:from-purple-700 active:to-violet-700
+                        text-white rounded-xl py-4 px-8 font-semibold 
+                        transition-all duration-300 ease-out
+                        ${(isUpdating || isCurrentPlan) ?
+                            'opacity-60 cursor-not-allowed bg-gray-400' :
+                            'hover:shadow-lg hover:shadow-purple-500/30'}
+                        transform hover:-translate-y-1
+                        overflow-hidden group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2`}
+                      >
+                        <span className="relative z-10 flex items-center justify-center space-x-3 font-paypal" style={{ marginTop: '-4px', marginLeft: '-3px' }}>
+                          <span className="text-xl font-light" style={{ fontFamily: 'sans-serif' }}>
+                            {!user ? (currentLanguage === 'es' ? 'Inicia sesión para continuar' : 'Login to continue') :
+                              (currentLanguage === 'es' ? 'Pagar con ' : 'Pay with ')}
+                            {user && <span className="font-bold text-2xl transform -skew-x-12 inline-block" style={{ marginTop: '-6px', fontFamily: 'PayPalOpen-Regular, Helvetica, Arial, "Liberation Sans", sans-serif' }}>Stripe</span>}
+                          </span>
+                          {isUpdating && (
+                            <div className="ml-2 animate-spin rounded-full h-5 w-5 border-t-2 border-white"></div>
+                          )}
+                        </span>
+                      </motion.button>
 
                     </div>
                   </motion.div>

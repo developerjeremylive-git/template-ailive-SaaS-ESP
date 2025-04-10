@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useLanguage } from '../context/LanguageContext'
+import { useAuth } from '../context/AuthContext'
 import Header from '../components/Header'
 import AnimatedFooter from '../components/AnimatedFooter'
+import { FiCheck } from 'react-icons/fi'
 
 export default function ContactPage() {
 	const { t } = useLanguage()
+	const { user, supabase } = useAuth()
+	const [showSuccess, setShowSuccess] = useState(false)
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -13,16 +17,58 @@ export default function ContactPage() {
 		phone: '',
 		modelInterest: '',
 		message: '',
+		budget: '',
+		timeframe: ''
 	})
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		// Handle form submission
-		console.log(formData)
+		try {
+			// Preparar los datos para la inserción
+			const submissionData = {
+				user_id: user?.id || null,
+				name: formData.name,
+				email: formData.email,
+				company: formData.company,
+				phone: formData.phone,
+				service_interest: [formData.modelInterest],
+				budget: formData.budget,
+				timeframe: formData.timeframe,
+				message: formData.message
+			}
+
+			// Insertar en la tabla contact_submissions
+			const { error } = await supabase
+				.from('contact_submissions')
+				.insert([submissionData])
+
+			if (error) throw error
+
+			// Mostrar mensaje de éxito
+			setShowSuccess(true);
+
+			// Limpiar el formulario después de un envío exitoso
+			setFormData({
+				name: '',
+				email: '',
+				company: '',
+				phone: '',
+				modelInterest: '',
+				message: '',
+				budget: '',
+				timeframe: ''
+			})
+
+			// Mostrar el mensaje de éxito
+			setTimeout(() => setShowSuccess(false), 3000);
+		} catch (error) {
+			console.error('Error al enviar el formulario:', error)
+			alert(t('contact_error'))
+		}
 	}
 
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 	) => {
 		const { name, value } = e.target
 		setFormData((prev) => ({
@@ -173,6 +219,72 @@ export default function ContactPage() {
 
 							<div className="mb-6">
 								<label
+									htmlFor="budget"
+									className="block text-violet-200 mb-2"
+								>
+									{t('contact_budget')}
+								</label>
+								<select
+									id="budget"
+									name="budget"
+									value={formData.budget}
+									onChange={handleChange}
+									className="w-full px-4 py-2 rounded-lg bg-white bg-opacity-10 border border-purple-700 text-white focus:outline-none focus:border-purple-500"
+									required
+								>
+									<option value="" className="bg-purple-900">
+										{t('contact_select_budget')}
+									</option>
+									<option value="0-5000" className="bg-purple-900">
+										$0 - $5,000
+									</option>
+									<option value="5000-10000" className="bg-purple-900">
+										$5,000 - $10,000
+									</option>
+									<option value="10000-50000" className="bg-purple-900">
+										$10,000 - $50,000
+									</option>
+									<option value="50000+" className="bg-purple-900">
+										$50,000+
+									</option>
+								</select>
+							</div>
+
+							<div className="mb-6">
+								<label
+									htmlFor="timeframe"
+									className="block text-violet-200 mb-2"
+								>
+									{t('contact_timeframe')}
+								</label>
+								<select
+									id="timeframe"
+									name="timeframe"
+									value={formData.timeframe}
+									onChange={handleChange}
+									className="w-full px-4 py-2 rounded-lg bg-white bg-opacity-10 border border-purple-700 text-white focus:outline-none focus:border-purple-500"
+									required
+								>
+									<option value="" className="bg-purple-900">
+										{t('contact_select_timeframe')}
+									</option>
+									<option value="immediate" className="bg-purple-900">
+										{t('contact_timeframe_immediate')}
+									</option>
+									<option value="1-3months" className="bg-purple-900">
+										{t('contact_timeframe_1_3')}
+									</option>
+									<option value="3-6months" className="bg-purple-900">
+										{t('contact_timeframe_3_6')}
+									</option>
+									<option value="6months+" className="bg-purple-900">
+										{t('contact_timeframe_6_plus')}
+									</option>
+								</select>
+							</div>
+
+							<div className="mb-6">
+								<label
 									htmlFor="message"
 									className="block text-violet-200 mb-2"
 								>
@@ -209,11 +321,11 @@ export default function ContactPage() {
 						>
 							<div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6">
 								<h3 className="text-white font-semibold mb-2">{t('contact_email_label')}</h3>
-								<p className="text-violet-200">sales@ailive.com</p>
+								<p className="text-violet-200">📧</p>
 							</div>
 							<div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6">
 								<h3 className="text-white font-semibold mb-2">{t('contact_phone_label')}</h3>
-								<p className="text-violet-200">+1 (555) 123-4567</p>
+								<p className="text-violet-200">📞</p>
 							</div>
 							<div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6">
 								<h3 className="text-white font-semibold mb-2">{t('contact_hours_label')}</h3>
@@ -224,6 +336,34 @@ export default function ContactPage() {
 				</div>
 			</div>
 			<AnimatedFooter />
+			<AnimatePresence>
+				{showSuccess && (
+					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+						<motion.div
+							initial={{ opacity: 0, scale: 0.5 }}
+							animate={{ opacity: 1, scale: 1 }}
+							exit={{ opacity: 0, scale: 0.5 }}
+							className="bg-green-500 p-8 rounded-2xl shadow-2xl flex flex-col items-center space-y-4"
+						>
+							<motion.div
+								initial={{ scale: 0, rotate: -180 }}
+								animate={{
+									scale: [0, 1.2, 1],
+									rotate: [0, 360],
+									transition: {
+										duration: 0.8,
+										ease: "easeOut",
+										times: [0, 0.6, 1]
+									}
+								}}
+								className="p-4 bg-white bg-opacity-20 rounded-full"
+							>
+								<FiCheck className="w-16 h-16 text-white" />
+							</motion.div>
+						</motion.div>
+					</div>
+				)}
+			</AnimatePresence>
 		</div>
 	)
-} 
+}

@@ -1,4 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js';
+import { supabase } from '../context/AuthContext';
 
 interface NewsletterSubscription {
   id?: string;
@@ -10,7 +11,7 @@ interface NewsletterSubscription {
 class NewsletterService {
   private supabase: SupabaseClient;
 
-  constructor(supabase: SupabaseClient) {
+  constructor() {
     this.supabase = supabase;
   }
 

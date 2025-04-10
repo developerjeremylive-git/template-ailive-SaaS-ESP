@@ -69,10 +69,20 @@ app.post('/api/deepseek', async (c) => {
 		}
 
 		// Call the AI model with all parameters
+		const { model = 'deepseek' } = body
+
+		const modelUrl = model === 'llama' 
+			? '@cf/meta/llama-4-scout-17b-16e-instruct'
+			: '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
+
 		const stream = await c.env.AI.run(
-			'@cf/deepseek-ai/deepseek-r1-distill-qwen-32b' as any,
+			modelUrl as any,
 			{
-				messages,
+				messages: messages.map(msg => ({
+					role: msg.role === 'user' ? 'user' : 'assistant',
+					content: msg.content,
+					model: modelUrl
+				})),
 				stream: true,
 				temperature: temperature ?? 0.7,
 				max_tokens: max_tokens ?? 1024,
@@ -259,7 +269,7 @@ app.use('*', async (c, next) => {
           setTheme();
 
           // Contador de redirección
-          let count = 2;
+          let count = 1;
           function updateCounter() {
             const counter = document.getElementById('counter');
             counter.textContent = count;

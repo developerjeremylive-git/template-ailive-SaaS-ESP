@@ -6,6 +6,7 @@ interface LanguageContextType {
 	currentLanguage: Language
 	setLanguage: (lang: Language) => void
 	t: (key: string) => string | string[]
+	translateUrlCategory: (category: string) => string
 }
 
 const translations = {
@@ -855,8 +856,54 @@ const translations = {
 		'contact_email': 'Email',
 		'deepseek_demo_response': 'This is a simulated response from DeepSeek-R1-Distill-Qwen-32B. In a real implementation, this would be connected to the actual API.',
 		'only_deepseek_available': 'Only DeepSeek is available for now.',
+		'demo_worker_ai_desc': 'Experience the power of our most advanced language model.',
+		'tab_worker_ai': 'Cloudflare Worker AI',
+		'advanced_settings': 'Advanced Settings',
+		'show_history': 'Show History',
+		'chat_with_ai': 'Chat with AI',
+		'chat_history': 'Chat History',
+		'hide_history': 'Hide History',
+		'view_chat_history': 'View Chat History',
+		'open_settings': 'Open Settings',
+		'show_more': 'Show More',
+		'url_category_language': 'language',
+		'url_category_image': 'image',
+		'url_category_speech': 'speech',
+		'about_team': 'About Team',
+		'about_journey': 'Our Journey',
+		'contact_budget': 'Contact Budget',
+		'contact_select_budget': 'Select a budget',
+		'contact_timeframe': 'Timeframe',
+		'contact_select_timeframe': 'Select a timeframe',
+		'contact_timeframe_immediate': 'Immediate',
+		'contact_timeframe_1_3': '1-3 months',
+		'contact_timeframe_3_6': '3-6 months',
+		'contact_timeframe_6_plus': '6+ months',
 	},
 	es: {
+		'contact_timeframe_6_plus': '6+ meses',
+		'contact_timeframe_3_6': '3-6 meses',
+		'contact_timeframe_1_3': '1-3 meses',
+		'contact_timeframe_immediate': 'Inmediato',
+		'contact_select_timeframe': 'Selecciona un tiempo',
+		'contact_timeframe': 'Tiempo',
+		'contact_select_budget': 'Selecciona un presupuesto',
+		'contact_budget': 'Presupuesto',
+		'about_journey': 'Nuestro Viaje',
+		'about_team': 'Equipo',
+		'url_category_language': 'idioma',
+		'url_category_image': 'imagen',
+		'url_category_speech': 'voz',
+		'show_more': 'Mostrar Más',
+		'open_settings': 'Abrir Configuración',
+		'view_chat_history': 'Ver Historial de Chat',
+		'hide_history': 'Ocultar Historial',
+		'chat_history': 'Historial de Chat',
+		'chat_with_ai': 'Chatea con IA',
+		'show_history': 'Mostrar Historial',
+		'advanced_settings': 'Ajustes avanzados',
+		'tab_worker_ai': 'Cloudflare Trabajador IA',
+		'demo_worker_ai_desc': 'Experimenta el poder de nuestro modelo de lenguaje más avanzado.',
 		'only_deepseek_available': 'Solo DeepSeek está disponible por ahora.',
 		'install_ailive_sdk': 'Instalar el SDK de AILive',
 		'configure_api_key': 'Configurar tu clave API',
@@ -1040,6 +1087,8 @@ const translations = {
 
 		// DeepSeek Model
 		'deepseek_description': 'DeepSeek-R1-Distill-Qwen-32B, derivado de DeepSeek-R1, supera a OpenAI-o1-mini.',
+		
+				
 		// Auth Popup
 		'login': 'Iniciar Sesión',
 		'register': 'Registrarse',
@@ -1432,7 +1481,7 @@ const translations = {
 		'tab_stable_diffusion': 'Stable Diffusion',
 		'stable_diffusion_desc': 'Generación avanzada de imágenes con control preciso y salidas de alta calidad',
 		'stable_diffusion_prompt_placeholder': 'Describe la imagen que quieres generar en detalle...',
-		'deepseek_input_placeholder': 'Escribe tu mensaje aquí...',
+		'deepseek_input_placeholder': 'Escribe tu prompt aquí...',
 		'top_p': 'Top P',
 		'max_tokens': 'Tokens máximos',
 		'top_k': 'Top K',
